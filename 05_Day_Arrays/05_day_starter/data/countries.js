@@ -191,5 +191,5 @@ const countries = [
   'Vietnam',
   'Yemen',
   'Zambia',
-  'Zimbabwe'
-]
+  'Zimbabwe',
+];
