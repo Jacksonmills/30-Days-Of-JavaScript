@@ -646,23 +646,125 @@ console.log('countries');
 // console.log(sum(1, 2, 3, 999));
 
 // Write a function called sumOfArrayItems, it takes an array parameter and return the sum of all the items. Check if all the array items are number types. If not give return reasonable feedback.
+// const ages = [32, 33, 16, 40];
+// const wrong = [32, 33, 16, 'bad'];
+// function sumOfArrayItems(arr) {
+//   function checkType(item) {
+//     return typeof item === typeof 10;
+//   }
+//   if (!arr.every(checkType)) return 'ERROR ARRAY NOT ALL NUMBERS';
+//   return arr.reduce((a, b) => a + b, 0);
+// }
+// console.log(sumOfArrayItems(ages));
+// console.log(sumOfArrayItems(wrong));
 
 // Write a function called average, it takes an array parameter and returns the average of the items. Check if all the array items are number types. If not give return reasonable feedback.
+// const ages = [32, 36, 16, 44];
+// const wrong = [32, 33, 16, 'bad'];
+// const average = (arr) => {
+//   function checkType(item) {
+//     return typeof item === typeof 10;
+//   }
+//   if (!arr.every(checkType)) return 'ERROR';
+
+//   let sum = arr.reduce((a, b) => a + b, 0);
+//   return sum / arr.length;
+// };
+// console.log(average(ages));
+// console.log(average(wrong));
 
 // Write a function called modifyArray takes array as parameter and modifies the fifth item of the array and return the array. If the array length is less than five it return 'item not found'.
 // console.log(modifyArray(['Avocado', 'Tomato', 'Potato','Mango', 'Lemon','Carrot']);
 // ['Avocado', 'Tomato', 'Potato','Mango', 'LEMON', 'Carrot']
 // 'Not Found'
+// const foods = ['Avocado', 'Tomato', 'Potato', 'Mango', 'Lemon', 'Carrot'];
+// const tooShort = ['cool', 'arr', 'bro'];
+// function modifyArray(array) {
+//   const newArray = [];
+//   if (array.length < 5) {
+//     return 'NOT FOUND';
+//   }
+//   for (item of array) {
+//     if (item === array[4]) {
+//       newArray.push(item.toUpperCase());
+//     } else {
+//       newArray.push(item);
+//     }
+//   }
+//   return newArray;
+// }
+// console.log(modifyArray(foods));
+// console.log(modifyArray(tooShort));
 
 // Write a function called isPrime, which checks if a number is prime number.
+// function isPrime(n) {
+//   for (let i = 2; i < n; i++) {
+//     if (n % i === 0) return false;
+//   }
+//   return n > 1;
+// }
+// console.log(isPrime(200));
 
 // Write a functions which checks if all items are unique in the array.
+// const arr0 = [1, 2, 3, 3, 3];
+// const arr1 = [1, 2, 'poop', 4, 5];
+// const arr2 = ['hello', 'world', 'hello', 'poop'];
+// const arr3 = ['hello', 'world', 420, 'poop'];
+// const isUnique = (arr) => {
+//   return new Set(arr).size === arr.length;
+// };
+// console.log(isUnique(arr0));
+// console.log(isUnique(arr1));
+// console.log(isUnique(arr2));
 
 // Write a function which checks if all the items of the array are the same data type.
+// const sameTypes = (arr) => {
+//   const types = [];
+//   for (item of arr) {
+//     let type = typeof item;
+//     types.push(type);
+//   }
+//   const uniqueTypes = [...new Set(types)];
+//   console.log(uniqueTypes);
+//   if (uniqueTypes.length > 1) {
+//     return 'ERROR: ROGUE TYPE IN THERE SOMEWHERE';
+//   } else {
+//     return 'SAME TYPES!';
+//   }
+// };
+// console.log(sameTypes(arr3));
 
 // JavaScript variable name does not support special characters or symbols except $ or _. Write a function isValidVariable which check if a variable is valid or invalid variable.
+// const isValidVariableName = (name) => {
+//   const characters = `~!@#%^&*()-+={[]}|\\:;"'<>,.?/`;
+//   for (let j = 0; j < name.length; j++) {
+//     if (characters.includes(name[j])) {
+//       return `ERROR: ${name} is not a valid variable name.`;
+//     }
+//     return `${name} is a valid variable name.`;
+//   }
+// };
+// console.log(isValidVariableName('_var'));
 
 // Write a function which returns array of seven random numbers in a range of 0-9. All the numbers must be unique.
 // sevenRandomNumbers() // [(1, 4, 5, 7, 9, 8, 0)];
+// function sevenRandomNumbers() {
+//   const numbers = [];
+//   while (numbers.length < 7) {
+//     let random = Math.floor(Math.random() * 9) + 1;
+//     if (numbers.indexOf(random) === -1) numbers.push(random);
+//   }
+//   return numbers;
+// }
+// console.log(sevenRandomNumbers());
 
 // Write a function called reverseCountries, it takes countries array and first it copy the array and returns the reverse of the original array
+
+// function reverseCountries(countries) {
+//   const newArray = [];
+//   for (let i = countries.length - 1; i >= 0; i--) {
+//     newArray.push(countries[i]);
+//   }
+//   return newArray;
+// }
+// console.log(reverseCountries(countries));
