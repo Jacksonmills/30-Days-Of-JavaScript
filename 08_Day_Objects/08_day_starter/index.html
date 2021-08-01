@@ -20,10 +20,87 @@
   </head>
 
   <body>
-    <h1>30DaysOfJavaScript:08 Day</h1>
-    <h2>Objects</h2>
+    <form>
+      <h1>Sign up!</h1>
+      <!-- username: 'Alex', -->
+      <label for="username"><b>Username</b></label>
+      <input
+        type="text"
+        placeholder="Enter Username"
+        name="username"
+        id="username"
+        required
+      />
+      <!-- email: 'alex@alex.com', -->
+      <label for="email"><b>Email</b></label>
+      <input
+        type="text"
+        placeholder="Enter Email"
+        name="email"
+        id="email"
+        required
+      />
+      <!-- password: '123123', -->
+      <label for="psw"><b>Password</b></label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="psw"
+        id="psw"
+        required
+      />
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input
+        type="password"
+        placeholder="Repeat Password"
+        name="psw-repeat"
+        id="psw-repeat"
+        required
+      />
+      <button type="submit" class="js-sign-up">Sign up</button>
+    </form>
+
+    <form>
+      <h2>Sign In</h2>
+      <!-- username: 'Alex', -->
+      <label for="username-sign-in"><b>Username</b></label>
+      <input
+        type="text"
+        placeholder="Enter Username"
+        name="username-sign-in"
+        id="username-sign-in"
+        required
+      />
+      <!-- email: 'alex@alex.com', -->
+      <label for="email-sign-in"><b>Email</b></label>
+      <input
+        type="text"
+        placeholder="Enter Email"
+        name="email-sign-in"
+        id="email-sign-in"
+        required
+      />
+      <!-- password: '123123', -->
+      <label for="psw-sign-in"><b>Password</b></label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="psw-sign-in"
+        id="psw-sign-in"
+        required
+      />
+      <button type="submit" class="js-sign-in">Sign in</button>
+    </form>
+
+    <div>
+      <div class="user-name" data-name="John Smith">Current User</div>
+      <button type="submit" class="js-sign-out">Sign out</button>
+    </div>
 
     <script src="./data/countries_data.js"></script>
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/scope.js"></script>
+    <script src="./scripts/usersAndProducts.js"></script>
   </body>
 </html>
