@@ -210,15 +210,6 @@ const products = [
     likes: ['fg12cy'],
   },
 ];
-// _id: 'eedfcf',
-// name: 'mobile phone',
-// description: 'Huawei Honor',
-// price: 200,
-// ratings: [
-//   { userId: 'fg12cy', rate: 5 },
-//   { userId: 'zwf8md', rate: 4.5 },
-// ],
-// likes: [],
 
 // Create a function called rateProduct which rates the product
 const rateProduct = (products, target, user, rating) => {
@@ -243,7 +234,6 @@ const averageRating = (products, target) => {
     }
   }
 };
-// console.log(averageRating(products, 'eedfcf'));
 
 // Create a function called likeProduct. This function will helps to like to the product if it is not liked and remove like if it was liked.
 const likeProduct = (products, target, user) => {
