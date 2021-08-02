@@ -75,7 +75,7 @@ const getNewId = (users) => {
   }
 
   if (existingIds.includes(_id)) {
-    console.log('ERROR: _id already exists!');
+    console.log('ERROR: id already exists!');
     getNewId(users);
   } else {
     return _id;
@@ -85,7 +85,7 @@ const getNewId = (users) => {
 const formatDate = () => {
   const now = new Date();
   const initMonth = now.getMonth() + 1;
-  const initDay = now.getDay() + 1;
+  const initDay = now.getDate();
   const initHours = now.getHours();
   const initMinutes = now.getMinutes();
   //date
@@ -93,12 +93,14 @@ const formatDate = () => {
   const month = initMonth >= 10 ? initMonth : `0${initMonth}`;
   const year = now.getFullYear();
   // time
-  const hours = initHours >= 10 ? initHours : `0${initHours}`;
+  const hours12 = initHours > 12 ? initHours - 12 : initHours;
+  const hours = hours12 >= 10 ? hours12 : `0${hours12}`;
   const minutes = initMinutes >= 10 ? initMinutes : `0${initMinutes}`;
+  const AMPM = initHours < 12 ? 'AM' : 'PM';
 
-  const formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${
-    hours < 12 ? 'AM' : 'PM'
-  }`;
+  const formattedDate = `${month}/${day}/${year} ${
+    initHours === 0 ? '12' : hours
+  }:${minutes} ${AMPM}`;
   return formattedDate;
 };
 
@@ -109,7 +111,6 @@ const signUp = (users) => {
     username: document.querySelector('#username').value,
     email: document.querySelector('#email').value,
     password: document.querySelector('#psw').value,
-    // 08/01/2020 9:30 AM
     createdAt: formatDate(),
     isLoggedIn: false,
   };
