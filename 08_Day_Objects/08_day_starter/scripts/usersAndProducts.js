@@ -1,4 +1,4 @@
-const users = [
+let users = [
   {
     _id: 'ab12ex',
     username: 'Alex',
@@ -40,24 +40,33 @@ const users = [
     isLoggedIn: false,
   },
 ];
-let currUser = '';
-// _id: 'ab12ex',
-// username: 'Alex',
-// email: 'alex@alex.com',
-// password: '123123',
-// createdAt: '08/01/2020 9:00 AM',
-// isLoggedIn: false,
+console.log(users);
 
-// Sign Up
-// allows user to add to the collection. If user exists, inform the user that he has already an account.
 const signUpButton = document.querySelector('.js-sign-up');
+const signInButton = document.querySelector('.js-sign-in');
+const signOutButton = document.querySelector('.js-sign-out');
+const loggedInName = document.querySelector('.user-name');
+
+// check local storage for userData
+if (localStorage.getItem('userData')) {
+  users = JSON.parse(localStorage.getItem('userData'));
+  console.log(users);
+}
+let currUser = localStorage.getItem('user');
+// check local storage for user
+for (user of users) {
+  if (user._id === currUser) {
+    user.isLoggedIn = true;
+    loggedInName.textContent = user.username;
+  }
+}
+
+// get unique id
 const getNewId = (users) => {
   const existingIds = [];
   for (user of users) {
-    console.log(user);
     existingIds.push(user._id);
   }
-  // create unique id
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let _id = '';
@@ -73,48 +82,53 @@ const getNewId = (users) => {
   }
 };
 
-const signUp = (users) => {
-  // get user form inputs
-  const _id = getNewId(users);
-  const username = document.querySelector('#username').value;
-  const email = document.querySelector('#email').value;
-  const password = document.querySelector('#psw').value;
-  const createdAt = new Date(); // TODO: format date
-  let isLoggedIn = false;
+const formatDate = () => {
+  const now = new Date();
+  const initMonth = now.getMonth() + 1;
+  const initDay = now.getDay() + 1;
+  const initHours = now.getHours();
+  const initMinutes = now.getMinutes();
+  //date
+  const day = initDay >= 10 ? initDay : `0${initDay}`;
+  const month = initMonth >= 10 ? initMonth : `0${initMonth}`;
+  const year = now.getFullYear();
+  // time
+  const hours = initHours >= 10 ? initHours : `0${initHours}`;
+  const minutes = initMinutes >= 10 ? initMinutes : `0${initMinutes}`;
 
+  const formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${
+    hours < 12 ? 'AM' : 'PM'
+  }`;
+  return formattedDate;
+};
+
+// Sign up
+const signUp = (users) => {
   const newUser = {
-    _id: _id,
-    username: username,
-    email: email,
-    password: password,
-    createdAt: createdAt,
-    isLoggedIn: isLoggedIn,
+    _id: getNewId(users),
+    username: document.querySelector('#username').value,
+    email: document.querySelector('#email').value,
+    password: document.querySelector('#psw').value,
+    // 08/01/2020 9:30 AM
+    createdAt: formatDate(),
+    isLoggedIn: false,
   };
 
-  const existingUsernames = [];
-  const existingEmails = [];
   for (user of users) {
-    existingUsernames.push(user.username);
-    existingEmails.push(user.email);
+    if (newUser.username === user.username) {
+      console.log('Username taken.');
+      return;
+    }
+    if (newUser.email === user.email) {
+      console.log('Email already registered.');
+      return;
+    }
   }
-
-  if (
-    existingUsernames.includes(newUser.username) ||
-    existingEmails.includes(newUser.email)
-  ) {
-    console.log('ERROR: User already exists!');
-  } else {
-    return newUser;
-  }
+  users.push(newUser);
+  return localStorage.setItem('userData', JSON.stringify(users));
 };
-signUpButton.addEventListener('click', (e) => {
-  e.preventDefault();
-  users.push(signUp(users));
-});
-console.log(users);
 
 // Sign in
-const signInButton = document.querySelector('.js-sign-in');
 function signIn(users) {
   const username = document.querySelector('#username-sign-in').value;
   const email = document.querySelector('#email-sign-in').value;
@@ -126,31 +140,45 @@ function signIn(users) {
       user.email === email &&
       user.password === password
     ) {
-      console.log(`Signed in as ${username}`);
+      if (user.isLoggedIn) {
+        console.log('User already signed in.');
+        return;
+      }
+      console.log(`Signed in as ${username}(${user._id})`);
+      user.isLoggedIn = true;
       localStorage.setItem('user', user._id);
       currUser = localStorage.getItem('user');
-    } else {
-      console.log(`ERROR: User not found.`);
+      loggedInName.textContent = user.username;
+      return;
     }
   }
+  console.log('User not found');
+  return;
 }
+
+// Sign out
+function signOut(users, currUser) {
+  for (user of users) {
+    if (user._id === currUser) {
+      user.isLoggedIn = false;
+    }
+  }
+  console.log(users);
+  currUser = localStorage.removeItem('user');
+  loggedInName.textContent = '';
+}
+signUpButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  signUp(users);
+  console.log(users);
+});
 signInButton.addEventListener('click', (e) => {
   e.preventDefault();
   signIn(users);
-  console.log(rateProduct(products, 'eedfcf', currUser, 420));
-  console.log(averageRating(products, 'eedfcf'));
-  console.log(likeProduct(products, 'eedfcf', currUser));
-  console.log(products);
 });
-
-// Sign out
-const signOutButton = document.querySelector('.js-sign-out');
-function signOut(user) {
-  currUser = localStorage.clear();
-}
 signOutButton.addEventListener('click', (e) => {
   e.preventDefault();
-  signOut(currUser);
+  signOut(users, currUser);
 });
 
 const products = [
@@ -215,7 +243,7 @@ const averageRating = (products, target) => {
     }
   }
 };
-console.log(averageRating(products, 'eedfcf'));
+// console.log(averageRating(products, 'eedfcf'));
 
 // Create a function called likeProduct. This function will helps to like to the product if it is not liked and remove like if it was liked.
 const likeProduct = (products, target, user) => {
