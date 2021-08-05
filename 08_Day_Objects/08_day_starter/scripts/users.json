@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "ab12ex",
+    "username": "Alex",
+    "email": "alex@alex.com",
+    "password": "123123",
+    "createdAt": "08/01/2020 9:00 AM",
+    "isLoggedIn": false
+  }
+]
+
+[
+    {
+    "username": "Asab",
+    "email": "asab@asab.com",
+    "password": "123456",
+    "createdAt": "08/01/2020 9:30 AM",
+    "isLoggedIn": false
+  },
+  {
+    "username": "Brook",
+    "email": "brook@brook.com",
+    "password": "123111",
+    "createdAt": "08/01/2020 9:45 AM",
+    "isLoggedIn": false
+  }
+]

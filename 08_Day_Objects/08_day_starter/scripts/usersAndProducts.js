@@ -106,11 +106,38 @@ const formatDate = () => {
 
 // Sign up
 const signUp = (users) => {
+  // get user inputs
+  const usernameElement = document.querySelector('#username');
+  const usernameRegex = usernameElement.getAttribute('pattern');
+  const username = usernameElement.value;
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#psw').value;
+  const passwordRepeat = document.querySelector('#psw-repeat').value;
+
+  // validate user inputs exist/match
+  if (!username) return console.log('Username is required');
+  if (!email) return console.log('Email is required');
+  if (password !== passwordRepeat) return console.log('Passwords do not match');
+  if (!password || !passwordRepeat) return console.log('Password is required');
+
+  // validate username
+  // if (username.length < usernameElement.getAttribute('minlength')) {
+  //   return console.log('Username too short!');
+  // }
+  // if (username.length > usernameElement.getAttribute('maxlength')) {
+  //   return console.log('Username too long!');
+  // }
+  // if (/usernameRegex/.test(username) === false) {
+  //   return console.log('Username invalid!');
+  // }
+
+  // addUserToMongoDB(newUser);
+
   const newUser = {
     _id: getNewId(users),
-    username: document.querySelector('#username').value,
-    email: document.querySelector('#email').value,
-    password: document.querySelector('#psw').value,
+    username: username,
+    email: email,
+    password: password,
     createdAt: formatDate(),
     isLoggedIn: false,
   };
@@ -169,7 +196,7 @@ function signOut(users, currUser) {
   loggedInName.textContent = '';
 }
 signUpButton.addEventListener('click', (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   signUp(users);
   console.log(users);
 });
